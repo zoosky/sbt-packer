@@ -34,3 +34,19 @@ artifact in (Compile, assembly) := {
 }
 
 addArtifact(artifact in (Compile, assembly), assembly)
+
+
+// skip test in assembly
+test in assembly := {}
+
+outputPath in assembly := baseDirectory.value / "assembly" / (name.value + "-" + version.value + ".jar")
+
+cleanFiles <+= baseDirectory { base => base / "assembly" }
+
+// skip test in assembly
+test in assembly := {}
+
+
+libraryDependencies += "com.github.scopt" %% "scopt" % "3.4.0"
+
+//resolvers += Resolver.sonatypeRepo("public")
