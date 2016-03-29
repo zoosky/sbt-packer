@@ -28,6 +28,10 @@ object Build extends AutoPlugin {
     unmanagedSourceDirectories.in(Compile) := Vector(scalaSource.in(Compile).value),
     unmanagedSourceDirectories.in(Test) := Vector(scalaSource.in(Test).value),
 
+    resolvers ++=
+      Seq(
+          Resolver.sonatypeRepo("public")),
+
     // Scalariform settings
     SbtScalariform.autoImport.scalariformPreferences := SbtScalariform.autoImport.scalariformPreferences.value
       .setPreference(AlignSingleLineCaseStatements, true)
