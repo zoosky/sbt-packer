@@ -44,13 +44,39 @@ object Packer {
     } */
 
     parser.parse(args, Config()) match {
-      case Some(config) => println(config)
+      case Some(config) =>
+        println(config); unpack(config)
       // do stuff
-      //check if nodeconfig exists. If not, write defaultNode.conf out.
-      case None         =>
+      //check if node.conf exists. If not, write defaultNode.conf out.
+
+      case None =>
       // arguments are bad, error message will have been displayed
     }
 
+  }
+
+  def unpack(c: Config) = {
+    val dirlist = getListOfFiles(new File("packer"))
+    println(dirlist)
+  }
+
+  // assumes that dir is a directory known to exist: packer
+  def getListOfSubDirectories(dir: File): List[String] =
+    dir.listFiles
+      .filter(_.isDirectory)
+      .map(_.getName)
+      .toList
+
+  def getListOfFiles(dir: File): List[File] =
+    dir.listFiles.filter(_.isFile).toList
+
+  def getListOfFiles(dir: String): List[File] = {
+    val d = new File(dir)
+    if (d.exists && d.isDirectory) {
+      d.listFiles.filter(_.isFile).toList
+    } else {
+      List[File]()
+    }
   }
 
   case class Config(
