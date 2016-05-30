@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+package sbt.sbtpacker
+
 import collection.JavaConverters._
 
 object Test {
@@ -41,5 +43,31 @@ object Test {
     for (file <- new File(".").listFiles) {
       println(file.getAbsolutePath)
     }
+    // println("chars " + chars)
+    //println(getResourceAsCharStream(this.getClass, "LICENSE"))
+    //println(wordlines)
+  }
+
+  //io.BufferedSource
+
+  //val resource = "sbtpkr/ScalaByExample.pdf"
+  //val chars = getResourceAsCharStream(this.getClass, resource).iterator
+
+  private def getResourceAsCharStream(clazz: Class[_], resource: String): Stream[Char] = {
+    val stream = clazz.getClassLoader() getResourceAsStream resource
+    if (stream == null) Stream.empty
+    else Stream continually stream.read() takeWhile (_ != -1) map (_.asInstanceOf[Char])
+  }
+
+  def wordlines = {
+    val is = getClass.getClassLoader.getResourceAsStream("sbtpkr/afolder/Some-LICENSE")
+    scala.io.Source.fromInputStream(is).mkString
+  }
+
+}
+
+object Test2 {
+  def main(args: Array[String]) = {
+    println("hello")
   }
 }

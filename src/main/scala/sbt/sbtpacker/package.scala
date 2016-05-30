@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.artooa.sbt
+package sbt.sbtpacker
 
 package object packer {
 

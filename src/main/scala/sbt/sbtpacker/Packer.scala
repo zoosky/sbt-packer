@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.artooa.sbt.packer
+package sbt.sbtpacker
 
 import java.io.File
 
